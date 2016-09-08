@@ -192,6 +192,52 @@
  )
 
 
+;; Exercise 3.7
+(define (make-join acc oldpass newpass)
+
+  (define (dispatch p m)
+    (if (eq? p newpass) (acc oldpass m)
+        (lambda (any) "Incorrect password")))
+  dispatch)
+
+
+;; Exercise 3.17
+
+(define (count-pairs x) 
+   (let ((encountered '())) 
+     (define (helper x) 
+       (if (or (not (pair? x)) (memq x encountered)) 
+         0 
+         (begin 
+           (set! encountered (cons x encountered)) 
+           (+ (helper (car x)) 
+              (helper (cdr x)) 
+              1)))) 
+   (helper x))) 
+
+
+;; Exercise 3.18
+
+(define (has-cycle? xs)
+  (define seen null)
+  (define (cycle-aux ys)
+    (cond ((null? ys) #f)
+          ((memq (car ys) seen) #t)
+          (else (set! seen (cons (car ys) seen))
+                (cycle-aux (cdr ys)))))
+  (cycle-aux xs))
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
